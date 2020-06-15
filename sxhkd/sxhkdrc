@@ -1,0 +1,133 @@
+# BSPWM HOTKEYS
+
+# make sxhkd reload its configuration files:
+alt + shift + Escape
+	pkill -USR1 -x sxhkd
+
+# quit/restart bspwm
+alt + shift + {x,r}
+	bspc {quit,wm -r}
+
+# close and kill
+alt + shift + q
+	bspc node -c
+
+# alternate between the tiled and monocle layout
+alt + shift + o
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+#alt + y
+	#bspc node newest.marked.local -n newest.!automatic.local
+
+
+# STATE/FLAGS
+
+# set the window state
+alt + {t,shift + t,shift + @space,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+#alt + ctrl + {m,x,y,z}
+	#bspc node -g {marked,locked,sticky,private}
+
+
+# FOCUS/SWAP
+
+# focus the node in the given direction
+alt + {h,j,k,l}
+	bspc node -{f} {west,south,north,east}
+
+# swap with the node in the given direction
+alt + shift + {h,j,k,l}
+	bspc node -{s} {west,south,north,east}
+
+# focus the node for the given path jump
+#alt + {p,b,comma,period}
+	#bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+alt + {_,shift + }n
+	bspc node -f {next,prev}.local
+
+# focus the last node/desktop
+#alt + {grave,Tab}
+	#bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+#alt + {o,i}
+	#bspc wm -h off; \
+	#bspc node {older,newer} -f; \
+	#bspc wm -h on
+
+# focus or send to the given desktop
+alt + {_,shift + }{1-9}
+	bspc {desktop -f,node -d} focused:'^{1-9}'
+
+
+# PRESELECT
+
+# preselect the direction
+#alt + ctrl + {h,j,k,l}
+	#bspc node -p {west,south,north,east}
+
+# preselect the direction
+alt + {u,i,o,p}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+alt + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+alt + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+alt + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+
+# MOVE/RESIZE
+
+# expand a window by moving one of its side outward
+#alt + ctrl + shift + {h,j,k,l}
+	#bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# expand window
+alt + shift + {u,i,o,p}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+#alt + ctril + shift +  {h,j,k,l}
+	#bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# contract a window by moving one of its side inward
+alt + ctrl +  {u,i,o,p}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+#alt + {Left,Down,Up,Right}
+	#bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+# terminal emulator
+alt + Return
+	termite
+
+# launch google-chrome
+alt + c
+    google-chrome-stable
+
+# launch ksysguard
+alt + m
+    ksysguard
+
+# launch file manager
+alt + e
+    dolphin
+    
+    
+# run program launcher
+alt + d
+	dmenu_run
